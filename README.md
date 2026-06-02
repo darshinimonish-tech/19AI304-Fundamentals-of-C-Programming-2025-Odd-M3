@@ -28,7 +28,49 @@ To formulate a C program to convert a decimal number into its binary equivalent 
 ### Step 8: 
    Stop
 # Program:
+
+```
+#include <stdio.h>
+
+int main()
+{
+    int num, rem, binary[32], i = 0, k;
+
+    printf("Enter a decimal number: ");
+    scanf("%d", &num);
+
+    if(num == 0)
+    {
+        printf("Binary Equivalent = 0");
+        return 0;
+    }
+
+    while(num > 0)
+    {
+        rem = num % 2;
+        binary[i] = rem;
+        i++;
+        num = num / 2;
+    }
+
+    printf("Binary Equivalent = ");
+
+    for(k = i - 1; k >= 0; k--)
+    {
+        printf("%d", binary[k]);
+    }
+
+    return 0;
+}
+```
 # Output:
+Sample input
+25
+ output
+
+ Binary Equivalent = 11001
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -67,7 +109,62 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9: 
   Stop
 # Program:
+
+```
+#include <stdio.h>
+
+int main()
+{
+    int a[10][10], n, i, j, k, min, col, found = 0;
+
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
+        for(j = 0; j < n; j++)
+            scanf("%d", &a[i][j]);
+
+    for(i = 0; i < n; i++)
+    {
+        min = a[i][0];
+        col = 0;
+
+        for(j = 1; j < n; j++)
+            if(a[i][j] < min)
+            {
+                min = a[i][j];
+                col = j;
+            }
+
+        for(k = 0; k < n; k++)
+            if(a[k][col] > min)
+                break;
+
+        if(k == n)
+        {
+            printf("Saddle Point = %d at (%d,%d)", min, i, col);
+            found = 1;
+            break;
+        }
+    }
+
+    if(!found)
+        printf("No Saddle Point");
+
+    return 0;
+}
+```
 # Output:
+Sample input
+3
+3 1 3
+3 2 4
+0 1 5
+
+output
+
+Saddle Point = 3 at (0,0)
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -101,7 +198,43 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10: 
   Stop
 # Program:
+
+```
+#include <stdio.h>
+
+int main()
+{
+    char s[100], d[100];
+    int i = 0, j = 0, len;
+
+    scanf("%[^\n]s", s);
+
+    while(s[i] != '\0')
+        i++;
+
+    len = i;
+
+    for(i = len - 1; i >= 0; i--)
+        d[j++] = s[i];
+
+    d[j] = '\0';
+
+    printf("%s", d);
+
+    return 0;
+}
+```
 # Output:
+
+Sample input:
+
+Hello World
+
+output:
+
+dlroW olleH
+
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -135,7 +268,49 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8:
   Stop
 # Program:
+```
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char s[100];
+    int visited[256] = {0}, i, j, count, n;
+
+    scanf("%[^\n]", s);
+
+    n = strlen(s);
+
+    for(i = 0; i < n; i++)
+    {
+        if(visited[(unsigned char)s[i]] == 0)
+        {
+            count = 0;
+
+            for(j = 0; j < n; j++)
+            {
+                if(s[i] == s[j])
+                    count++;
+            }
+
+            printf("%c = %d\n", s[i], count);
+            visited[(unsigned char)s[i]] = 1;
+        }
+    }
+
+    return 0;
+}
+```
 # Output:
+Sample input:
+hello
+
+output
+h = 1
+e = 1
+l = 2
+o = 1
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -169,7 +344,58 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8: 
   Stop
 # Program:
+
+```
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char str[100], words[50][20];
+    int i, j = 0, k = 0, count = 0;
+
+    scanf("%[^\n]s", str);
+
+    for(i = 0; ; i++)
+    {
+        if(str[i] == ' ' || str[i] == '\0')
+        {
+            words[count][k] = '\0';
+            count++;
+            k = 0;
+
+            if(str[i] == '\0')
+                break;
+        }
+        else
+        {
+            words[count][k++] = str[i];
+        }
+    }
+
+    for(i = 0; i < count; i++)
+    {
+        for(j = i + 1; j < count; j++)
+        {
+            if(strcmp(words[i], words[j]) == 0)
+                words[j][0] = '\0';
+        }
+    }
+
+    for(i = 0; i < count; i++)
+    {
+        if(words[i][0] != '\0')
+            printf("%s ", words[i]);
+    }
+
+    return 0;
+}
+```
 # Output:
+Sample input
+this is is a a test test
+sample output
+this is a test
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
